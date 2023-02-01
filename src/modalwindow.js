@@ -111,6 +111,7 @@ export default class ModalWindow {
   }
 
   openModal(windowEl) {
+    this.options.isOpen(this);
     this.previusFocusElem = document.activeElement;
     this.documentFocusElems = document.querySelectorAll(this.focusElems);
     this.navigationOff(this.documentFocusElems);
@@ -126,7 +127,6 @@ export default class ModalWindow {
       this.modalOpened = true;
       this.navigationOn(this.documentFocusElems);
     }, this.speed);
-    this.options.isOpen(this);
   }
 
   closeModal(windowEl) {
@@ -150,7 +150,6 @@ export default class ModalWindow {
         this.modalFocusElems[0].focus();
       }, this.speed);
     }
-
 
     if (this.modalCloseBtn && this.options.autoFocusToCloseBtn) {
       setTimeout(() => {
@@ -197,13 +196,15 @@ export default class ModalWindow {
 
   disableScroll() {
     const fixBlocks = document?.querySelectorAll(`[${this.options.fixElemName}]`);
-    let scrollWidth = window.innerWidth - document.body.offsetWidth + 'px';
-    document.body.style.paddingRight = scrollWidth;
-    fixBlocks.forEach(el => { el.style.paddingRight = scrollWidth; });
-    let pagePosition = window.scrollY;
+    const pagePosition = window.scrollY;
+    const paddingOffset = `${(window.innerWidth - document.body.offsetWidth)}px`;
+
+    document.documentElement.style.scrollBehavior = 'none';
+    fixBlocks.forEach(el => { el.style.paddingRight = paddingOffset; });
+    document.body.style.paddingRight = paddingOffset;
     document.body.classList.add(this.options.disableScrollName);
     document.body.dataset.position = pagePosition;
-    document.body.style.top = -pagePosition + 'px';
+    document.body.style.top = `-${pagePosition}px`;
   }
 
   enableScroll() {
