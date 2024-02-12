@@ -2,30 +2,85 @@
 <html lang="ru">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../dist/modalwindow.min.css">
-	<title>Modalwindow demo</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../dist/modalwindow.min.css">
+  <title>Modal demo</title>
 </head>
+<style>
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  .content {
+    background-color: bisque;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .body {
+    height: 2000px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .modal__window {
+    max-width: 400px;
+    height: 300px;
+  }
+
+  *:focus {
+    outline: 1px solid green;
+  }
+</style>
 
 <body class="body">
-	<div class="container" data-modal-fix>
-    <button type="button" class="btn" data-modal="first-modal" data-modal-speed="400">Модальное окно 1</button>
-    <button type="button" class="btn" data-modal="middle-modal">Модальное окно 2</button>
-    <button type="button" class="btn" data-modal="last-modal" data-modal-speed="700">Модальное окно 3</button>
+  <div class="content" data-modal-fix>
+    <button type="button" data-modal-btn="first-modal" data-modal-speed="300">Модальное окно 1</button>
+    <button type="button" data-modal-btn="second-modal">Модальное окно 2</button>
+    <button type="button" data-modal-btn="last-modal" data-modal-speed="600">Модальное окно 3</button>
   </div>
   <div class="modal" data-modal-overlay>
-    <div class="modal-window" data-modal-target="first-modal">
-      <button type="button" class="btn" data-modal-close>Закрыть модальное окно</button>
+    <div class="modal__window" data-modal-window="first-modal">
+      Модальное окно 1
+      <button type="button" data-modal-btn="last-modal">Модальное окно 3</button>
+      <button type="button">button</button>
+      <button type="button">button</button>
+      <button type="button">button</button>
+      <button type="button" data-modal-close>Закрыть окно</button>
+      <input type="text">
     </div>
-    <div class="modal-window" data-modal-target="middle-modal">Модальное окно 2</div>
-    <div class="modal-window" data-modal-target="last-modal">Модальное окно 3</div>
+    <div class="modal__window" data-modal-window="second-modal">
+      Модальное окно 2
+      <button type="button" data-modal-close>Закрыть окно</button>
+      <button type="button" data-modal-btn="first-modal">Модальное окно 1</button>
+    </div>
+    <div class="modal__window" data-modal-window="last-modal">
+      Модальное окно 3
+      <button type="button">button</button>
+      <button type="button">button</button>
+      <button type="button" data-modal-btn="second-modal">Модальное окно 2</button>
+    </div>
+    <div class="modal__window" data-modal-window="promo-modal">
+      promo
+      <!-- <button type="button" data-modal-btn="first-modal">Модальное окно 1</button> -->
+    </div>
   </div>
-	<script src="../dist/modalwindow.min.js"></script>
-	<script>
-		const modal = new ModalWindow('[data-modal]');
-	</script>
+  <script src="../dist/modalwindow.min.js"></script>
+  <script>
+    const modal = new ModalWindow('[data-modal-btn]');
+  </script>
 </body>
 
 </html>

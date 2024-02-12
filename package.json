@@ -1,6 +1,6 @@
 {
   "name": "r-modalwindow",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Simple JS Library for modal",
   "main": "src/modalwindow.js",
   "repository": {
